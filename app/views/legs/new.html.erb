@@ -1,0 +1,50 @@
+<%= form_for @leg do |f| %>
+
+<div>
+	<%= f.label :location  %>
+	<%= f.collection_select(:location_id, @locations, :id, :name) %>
+</div>
+
+<div>
+	<%= f.label :destination %>
+	<%= f.label :destination %>
+</div>
+
+<div>
+	<%= f.label      :start_date %>
+	<%= f.date_field :start_date  %>
+</div>
+
+<div>
+	<%= f.label      :end_date %>
+	<%= f.date_field :end_date  %>
+</div>
+<h3>Expenses</h3>
+<div>
+    <button id="add_line_item">Add another line item</button>
+	<table id="expense_line_items">
+		<tr>
+		<th class="expense_desc">Expense description</th>
+		<th class="expense_date">Date</th>
+		<th class="expense_ccy">Currency</th>
+		<th class="expense_amt">Amount</th>
+		</tr>
+	  <%= f.fields_for :line_items do |ff| %>
+		  <tr>
+		  	<td class="expense_desc"><%= ff.text_field :description %></td>
+		  	<td class="expense_date" ><%= ff.date_field :value_date %></td>
+		  	<td class="expense_ccy" ><%= ff.text_field :ccy %></td>
+		  	<td class="expense_amt" ><%= ff.number_field :ccy_amount %></td>
+		  </tr>
+	  <% end %>
+    </table>
+</div>
+
+
+<div>
+	<%= f.submit "Save leg and expenses" %>
+</div>
+
+
+<% end %>
+
